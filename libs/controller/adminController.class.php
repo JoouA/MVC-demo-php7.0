@@ -23,11 +23,23 @@ class adminController{
 
 
 	public function login(){
-		if ($_POST) {
+		// 当用户还没有登录过的时候进入登录判断
+		if (empty($this->auth)) {
+			if ($_POST) {
+		  	 	$this->checklogin();
+			}else{
+				VIEW::display('admin/login.html');
+			}
+		}else{
+			// VIEW::display('admin/index.html');
+			header('Location:index.php?controller=admin&method=index');
+		}
+		
+		/*if ($_POST) {
 		   $this->checklogin();
 		}else{
-		VIEW::display('admin/login.html');
-		}	
+			VIEW::display('admin/login.html');
+		}	*/
 	}
 
 
